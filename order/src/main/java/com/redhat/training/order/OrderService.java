@@ -19,7 +19,15 @@ public class OrderService {
 
     @GET
     @Path("/order")
-
+    @Counted(name = "order_svc:spl50_orders_placed",
+    description = "count of spl50 orders placed")
+    @SimplyTimed(name = "order_svc:spl50_order_process_time",
+           description = "A measure of how long it takes to process an order",
+           unit = MetricUnits.MILLISECONDS)
+    @Metered(name = "order_svc:orders_processed_rate",
+         unit = MetricUnits.MINUTES,
+         description = "Rate at which orders are placed",
+         absolute = true)
     // TODO
     // 1. Add a counter to count the spl50 orders placed
     // 2. Add a simple timer to track the response time
